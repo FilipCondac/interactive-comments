@@ -5,9 +5,14 @@ import mongoose from "mongoose";
 const connectDB = async () => {
   try {
     mongoose.set("strictQuery", false);
-    await mongoose.connect(process.env.MONGO_URI!);
-  } catch (error: any) {
-    console.error(`Error: ${error.message}`);
+    const MONGO_URI = process.env.MONGO_URI;
+    if (MONGO_URI) await mongoose.connect(MONGO_URI);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error(`Error: ${error.message}`);
+    } else {
+      console.error(`An unexpected error occurred: ${error}`);
+    }
   }
 
   const connection = mongoose.connection;

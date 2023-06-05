@@ -1,18 +1,18 @@
-import axios from "axios";
+import Post from "./components/Post";
+
+interface Post {
+  _id: string;
+  creator: string;
+  content: string;
+  likes: Array<string>;
+  createdAt: Date;
+  replies: Array<string>;
+}
+
 const App = () => {
-  const test = async () => {
-    const res = await axios.get("/");
-
-    console.log(res.data);
-  };
-
-  test();
-
   return (
-    <main className="flex flex-col h-screen justify-center">
-      <h1 className="text-5xl m-auto">
-        React + Tailwind + Typescript + Vite Template
-      </h1>
+    <main className="flex flex-col pt-10 bg-very-light-gray min-h-screen">
+      <Post />
     </main>
   );
 };
