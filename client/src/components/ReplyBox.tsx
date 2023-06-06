@@ -1,3 +1,4 @@
+//Purpose: This file creates the reply box component
 import postReply from "../../util/postReply";
 import { useState } from "react";
 

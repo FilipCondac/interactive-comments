@@ -41,9 +41,9 @@ const Reply = ({ postId }: ReplyProps) => {
   return (
     <div>
       {isLoading ? (
-        <div>Loading...</div> // Replace this with your own loading spinner or placeholder
+        <div>Loading...</div> // Replace this with a loading spinner
       ) : (
-        repliesData.map((reply: any) => (
+        repliesData.map((reply: Reply) => (
           <article key={reply._id} className="mx-auto rounded-md mt-10 w-1/2">
             <div className="flex bg-white p-10 ">
               <PostVotes post={reply} postType={"reply"} />

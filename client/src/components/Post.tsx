@@ -2,7 +2,6 @@ import getPosts from "../../util/getPosts";
 import calculatePostDate from "../../util/calculatePostDate";
 import { useEffect, useState } from "react";
 import ReplyBox from "./ReplyBox";
-// import PostReplies from "./PostReplies";
 import PostVotes from "./PostVotes";
 import Reply from "./Reply";
 
@@ -21,7 +20,7 @@ const Post = () => {
 
   useEffect(() => {
     getPosts().then((res) => setPosts(res));
-  }, []);
+  }, [posts]);
 
   const renderReplyBox = (postId: any) => {
     setOpenedReplyBox(openedReplyBox === postId ? null : postId);

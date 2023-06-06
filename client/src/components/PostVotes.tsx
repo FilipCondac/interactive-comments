@@ -1,7 +1,9 @@
+//Purpose: Component for handling votes on posts
 import handleVote from "../../util/handleVote";
+import { Post, Reply } from "../types/types";
 
 type PostVotesProps = {
-  post: any;
+  post: Post | Reply;
   postType: string;
 };
 

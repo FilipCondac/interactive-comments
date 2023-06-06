@@ -1,11 +1,11 @@
 import calculatePostDate from "../../util/calculatePostDate";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ReplyBox from "./ReplyBox";
 import PostVotes from "./PostVotes";
-import getPosts from "../../util/getPosts";
+import { Post } from "../types/types";
 
 type PostRepliesProps = {
-  post: any;
+  post: Post;
 };
 
 const PostReplies = ({ post }: PostRepliesProps) => {
@@ -49,7 +49,6 @@ const PostReplies = ({ post }: PostRepliesProps) => {
       {openedReplyBox === post._id && (
         <ReplyBox creator={post.creator} postId={post._id} />
       )}
-      {/* <PostReplies /> */}
     </article>
   );
 };
