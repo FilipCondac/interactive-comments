@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import ReplyBox from "./ReplyBox";
 // import PostReplies from "./PostReplies";
 import PostVotes from "./PostVotes";
+import Reply from "./Reply";
 
 interface Post {
   _id: string;
@@ -31,7 +32,7 @@ const Post = () => {
       {posts.map((post: Post) => (
         <article key={post._id} className="mx-auto rounded-md mt-10 w-1/2">
           <div className="flex bg-white p-10 ">
-            <PostVotes post={post} />
+            <PostVotes post={post} postType={"post"} />
             <div className="flex-col">
               <div className="flex">
                 <img
@@ -63,6 +64,7 @@ const Post = () => {
           {openedReplyBox === post._id && (
             <ReplyBox creator={post.creator} postId={post._id} />
           )}
+          <Reply postId={post._id} />
         </article>
       ))}
     </div>

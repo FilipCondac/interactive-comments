@@ -1,5 +1,6 @@
 import express, { Request, Response, Router } from "express";
 import Post from "../models/post";
+import Reply from "../models/reply";
 
 const router: Router = express.Router();
 
@@ -44,22 +45,34 @@ router.get("/getPosts", async (req: Request, res: Response) => {
 });
 
 router.post("/vote", async (req: Request, res: Response) => {
-  const { postId, voteType } = req.body;
+  const { postId, voteType, postType } = req.body;
 
-  if (!postId || !voteType) {
+  if (!postId || !voteType || !postType) {
     res.status(400).json({ message: "Post ID and vote type are required" });
     return;
   }
 
   try {
-    if (voteType === "like") {
-      await Post.findByIdAndUpdate(postId, {
-        $addToSet: { likes: "test" },
-      });
-    } else if (voteType === "dislike") {
-      await Post.findByIdAndUpdate(postId, {
-        $pull: { likes: "test" },
-      });
+    if (postType === "post") {
+      if (voteType === "like") {
+        await Post.findByIdAndUpdate(postId, {
+          $addToSet: { likes: "test" },
+        });
+      } else if (voteType === "dislike") {
+        await Post.findByIdAndUpdate(postId, {
+          $pull: { likes: "test" },
+        });
+      }
+    } else if (postType === "reply") {
+      if (voteType === "like") {
+        await Reply.findByIdAndUpdate(postId, {
+          $addToSet: { likes: "test" },
+        });
+      } else if (voteType === "dislike") {
+        await Reply.findByIdAndUpdate(postId, {
+          $pull: { likes: "test" },
+        });
+      }
     }
 
     res.status(200).json({ message: "Vote successful" });
@@ -81,10 +94,30 @@ router.post("/reply", async (req: Request, res: Response) => {
   }
 
   try {
-    await Post.findByIdAndUpdate(postId, {
-      $addToSet: { replies: reply },
+    await Reply.create({
+      content: reply,
+      creator: "test",
+      likes: [],
+      createdAt: new Date(),
+      postID: postId,
     });
+
+    //TODO: Add reply ID to post replies array
+
     res.status(200).json({ message: "Reply successful" });
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      console.error(`Error: ${err.message}`);
+    } else {
+      console.error(`An unexpected error occurred: ${err}`);
+    }
+  }
+});
+
+router.get("/getReplies/:postId", async (req: Request, res: Response) => {
+  try {
+    const replies = await Reply.find({ postID: req.params.postId });
+    res.status(200).json(replies);
   } catch (err: unknown) {
     if (err instanceof Error) {
       console.error(`Error: ${err.message}`);

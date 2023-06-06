@@ -1,6 +1,10 @@
 import axios from "axios";
 
-const handleVote = async (postId: string, voteType: string) => {
+const handleVote = async (
+  postId: string,
+  voteType: string,
+  postType: string
+) => {
   try {
     const response = await axios({
       method: "post",
@@ -9,7 +13,7 @@ const handleVote = async (postId: string, voteType: string) => {
         "Content-Type": "application/json",
       },
       data: {
-        // userID: "test",
+        postType: postType,
         postId: postId,
         voteType: voteType,
       },
