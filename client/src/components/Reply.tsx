@@ -39,16 +39,19 @@ const Reply = ({ postId }: ReplyProps) => {
   }, [postId]);
 
   return (
-    <div>
+    <div className="flex-col border-l-2 ml-12">
       {isLoading ? (
         <div>Loading...</div> // Replace this with a loading spinner
       ) : (
         repliesData.map((reply: Reply) => (
-          <article key={reply._id} className="mx-auto rounded-md mt-10 w-1/2">
+          <article
+            key={reply._id}
+            className="rounded-md mt-10 w-10/12 ml-auto "
+          >
             <div className="flex bg-white p-10 ">
               <PostVotes post={reply} postType={"reply"} />
               <div className="flex-col">
-                <div className="flex">
+                <div className="flex w-96">
                   <img
                     src="/images/avatars/image-amyrobson.png"
                     alt="User Icon"
@@ -59,7 +62,7 @@ const Reply = ({ postId }: ReplyProps) => {
                   </header>
                   <time>{calculatePostDate(reply.createdAt)}</time>
                   <button
-                    className=" ml-80 flex"
+                    className="ml-auto flex"
                     onClick={() => renderReplyBox(reply._id)}
                   >
                     <img
@@ -76,7 +79,7 @@ const Reply = ({ postId }: ReplyProps) => {
               </div>
             </div>
             {openedReplyBox === reply._id && (
-              <ReplyBox creator={reply.creator} postId={reply._id} />
+              <ReplyBox creator={reply.creator} postId={postId} />
             )}
           </article>
         ))

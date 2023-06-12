@@ -15,7 +15,7 @@ const PostReplies = ({ post }: PostRepliesProps) => {
     setOpenedReplyBox(openedReplyBox === postId ? null : postId);
   };
   return (
-    <article key={post._id} className="mx-auto rounded-md mt-10 w-1/2">
+    <article key={post._id} className="mx-auto rounded-md mt-10">
       <div className="flex bg-white p-10 ">
         <PostVotes post={post} postType={"reply"} />
         <div className="flex-col">

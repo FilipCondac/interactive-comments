@@ -1,22 +1,20 @@
 //Purpose: This file creates the reply box component
-import postReply from "../../util/postReply";
 import { useState } from "react";
+import postComment from "../../util/postComment";
 
-type ReplyBoxProps = {
+type CommentBoxProps = {
   creator: string;
-  postId: string;
 };
 
-const ReplyBox = ({ creator, postId }: ReplyBoxProps) => {
-  const [reply, setReply] = useState(`@${creator} `);
+const CommentBox = ({ creator }: CommentBoxProps) => {
+  const [comment, setComment] = useState("");
 
-  const handlePostReply = (postId: string, reply: string) => {
-    postReply(reply, postId);
-    location.reload();
+  const handleComment = (comment: string) => {
+    postComment(comment);
   };
 
   return (
-    <section className="bg-white mt-4 rounded-md flex">
+    <section className="bg-white mt-4 rounded-md flex w-1/2 mx-auto">
       <img
         src="/images/avatars/image-juliusomo.png"
         alt="Your user icon"
@@ -24,19 +22,19 @@ const ReplyBox = ({ creator, postId }: ReplyBoxProps) => {
       ></img>
       <textarea
         className="border-black border w-full"
-        value={reply}
-        onChange={(e) => setReply(e.target.value)}
+        value={comment}
+        onChange={(e) => setComment(e.target.value)}
       ></textarea>
       <button
         className=" bg-moderate-blue h-10 m-4 mx-4 px-4 rounded-lg p-2 text-sm text-white"
         onClick={() => {
-          handlePostReply(postId, reply);
+          handleComment(comment);
         }}
       >
-        Reply
+        Send
       </button>
     </section>
   );
 };
 
-export default ReplyBox;
+export default CommentBox;

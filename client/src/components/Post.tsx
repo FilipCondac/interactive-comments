@@ -63,6 +63,7 @@ const Post = () => {
           {openedReplyBox === post._id && (
             <ReplyBox creator={post.creator} postId={post._id} />
           )}
+
           <Reply postId={post._id} />
         </article>
       ))}

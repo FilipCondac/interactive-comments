@@ -85,6 +85,31 @@ router.post("/vote", async (req: Request, res: Response) => {
   }
 });
 
+router.post("/createPost", async (req: Request, res: Response) => {
+  const { content } = req.body;
+
+  if (!content) {
+    res.status(400).json({ message: "Content is required" });
+    return;
+  }
+
+  try {
+    await Post.create({
+      content: content,
+      creator: "test",
+      likes: [],
+      createdAt: new Date(),
+      replies: [],
+    });
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      console.error(`Error: ${err.message}`);
+    } else {
+      console.error(`An unexpected error occurred: ${err}`);
+    }
+  }
+});
+
 router.post("/reply", async (req: Request, res: Response) => {
   const { postId, reply } = req.body;
 
