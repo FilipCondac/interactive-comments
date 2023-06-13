@@ -11,6 +11,7 @@ type ReplyProps = {
 interface Reply {
   _id: string;
   creator: string;
+  creatorPicture: string;
   content: string;
   likes: Array<string>;
   createdAt: Date;
@@ -53,7 +54,7 @@ const Reply = ({ postId }: ReplyProps) => {
               <div className="flex-col">
                 <div className="flex w-96">
                   <img
-                    src="/images/avatars/image-amyrobson.png"
+                    src={reply.creatorPicture}
                     alt="User Icon"
                     className="w-10 h-10 mr-4 -mt-2 rounded-full"
                   ></img>

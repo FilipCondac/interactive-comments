@@ -1,6 +1,11 @@
 import axios from "axios";
 
-const postReply = async (reply: string, postId: string) => {
+const postReply = async (
+  reply: string,
+  postId: string,
+  creator: string,
+  creatorPicture: string
+) => {
   try {
     const response = await axios({
       method: "post",
@@ -11,6 +16,8 @@ const postReply = async (reply: string, postId: string) => {
       data: {
         postId: postId,
         reply: reply,
+        creator: creator,
+        creatorPicture: creatorPicture,
       },
     });
     console.log(response.data);

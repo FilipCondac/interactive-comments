@@ -1,6 +1,10 @@
 import axios from "axios";
 
-const postComment = async (comment: string) => {
+const postComment = async (
+  comment: string,
+  creator: string,
+  creatorPicture: string
+) => {
   const response = await axios({
     method: "post",
     url: "/createPost",
@@ -9,6 +13,8 @@ const postComment = async (comment: string) => {
     },
     data: {
       content: comment,
+      creator: creator,
+      creatorPicture: creatorPicture,
     },
   });
   console.log(response.data);

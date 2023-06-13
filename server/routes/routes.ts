@@ -5,7 +5,7 @@ import Reply from "../models/reply";
 const router: Router = express.Router();
 
 router.post("/createPost", async (req: Request, res: Response) => {
-  const { content } = req.body;
+  const { content, creator, creatorPicture } = req.body;
 
   if (!content) {
     res.status(400).json({ message: "Content is required" });
@@ -15,7 +15,8 @@ router.post("/createPost", async (req: Request, res: Response) => {
   try {
     await Post.create({
       content: content,
-      creator: "test",
+      creator: creator,
+      creatorPicture: creatorPicture,
       likes: [],
       createdAt: new Date(),
       replies: [],
@@ -85,33 +86,8 @@ router.post("/vote", async (req: Request, res: Response) => {
   }
 });
 
-router.post("/createPost", async (req: Request, res: Response) => {
-  const { content } = req.body;
-
-  if (!content) {
-    res.status(400).json({ message: "Content is required" });
-    return;
-  }
-
-  try {
-    await Post.create({
-      content: content,
-      creator: "test",
-      likes: [],
-      createdAt: new Date(),
-      replies: [],
-    });
-  } catch (err: unknown) {
-    if (err instanceof Error) {
-      console.error(`Error: ${err.message}`);
-    } else {
-      console.error(`An unexpected error occurred: ${err}`);
-    }
-  }
-});
-
 router.post("/reply", async (req: Request, res: Response) => {
-  const { postId, reply } = req.body;
+  const { postId, reply, creator, creatorPicture } = req.body;
 
   if (!postId || !reply) {
     res.status(400).json({ message: "Post ID and reply are required" });
@@ -121,7 +97,8 @@ router.post("/reply", async (req: Request, res: Response) => {
   try {
     await Reply.create({
       content: reply,
-      creator: "test",
+      creator: creator,
+      creatorPicture: creatorPicture,
       likes: [],
       createdAt: new Date(),
       postID: postId,

@@ -7,7 +7,7 @@ const App = () => {
     <main className="flex flex-col pt-10 bg-very-light-gray min-h-screen">
       <TopNav />
       <Post />
-      <CommentBox creator={"Julius"} />
+      <CommentBox />
     </main>
   );
 };

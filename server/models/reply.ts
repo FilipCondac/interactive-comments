@@ -7,6 +7,10 @@ const replySchema = new Schema({
     type: String,
     required: true,
   },
+  creatorPicture: {
+    type: String,
+    required: true,
+  },
   content: {
     type: String,
     required: true,
@@ -27,6 +31,7 @@ const replySchema = new Schema({
 
 export interface IReply extends Document {
   creator: string;
+  creatorPicture: string;
   content: string;
   likes: Array<string>;
   createdAt: Date;

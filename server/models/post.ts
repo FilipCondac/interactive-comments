@@ -7,6 +7,10 @@ const postSchema = new Schema({
     type: String,
     required: true,
   },
+  creatorPicture: {
+    type: String,
+    required: true,
+  },
   content: {
     type: String,
     required: true,
@@ -27,6 +31,7 @@ const postSchema = new Schema({
 
 export interface IPost extends Document {
   creator: string;
+  creatorPicture: string;
   content: string;
   likes: Array<string>;
   createdAt: Date;

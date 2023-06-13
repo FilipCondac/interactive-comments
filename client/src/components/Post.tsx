@@ -8,6 +8,7 @@ import Reply from "./Reply";
 interface Post {
   _id: string;
   creator: string;
+  creatorPicture: string;
   content: string;
   likes: Array<string>;
   createdAt: Date;
@@ -35,7 +36,7 @@ const Post = () => {
             <div className="flex-col">
               <div className="flex">
                 <img
-                  src="/images/avatars/image-amyrobson.png"
+                  src={post.creatorPicture}
                   alt="User Icon"
                   className="w-10 h-10 mr-4 -mt-2 rounded-full"
                 ></img>

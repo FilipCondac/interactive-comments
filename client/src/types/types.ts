@@ -1,6 +1,7 @@
 export interface Reply {
   _id: string;
   creator: string;
+  creatorPicture: string;
   content: string;
   likes: Array<string>;
   createdAt: Date;
@@ -10,6 +11,7 @@ export interface Reply {
 export interface Post {
   _id: string;
   creator: string;
+  creatorPicture: string;
   content: string;
   likes: Array<string>;
   createdAt: Date;
